@@ -76,10 +76,8 @@ func RunTest(a myself, keys []string, values ...string) {
 
 func MultipleQueryParameterValues(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()
-	names := query["name"]  // Mengambil semua nilai dari parameter "name"
-  age := query["age"]
-  fmt.Fprintln(w, strings.Join(names, " "))
-  fmt.Fprintln(w, strings.Join(age," "))
+  fmt.Fprintln(w, strings.Join(query["name"], " "))
+  fmt.Fprintln(w, strings.Join(query["age"]," "))
 }
 
 func TestMultipleQueryParameterValues(t *testing.T) {
