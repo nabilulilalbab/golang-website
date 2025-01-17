@@ -13,10 +13,11 @@ func HelloHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func TestHttp(t *testing.T) {
-	request := httptest.NewRequest(http.MethodGet, "http://localhoost/hello", nil)
+	request := httptest.NewRequest(http.MethodGet, "http://localhost/hello", nil)
 	recorder := httptest.NewRecorder()
 	HelloHandler(recorder, request)
 	response := recorder.Result()
+  fmt.Println(response.Body)
 	body, _ := io.ReadAll(response.Body)
 	bodyString := string(body)
 	fmt.Println(bodyString)
