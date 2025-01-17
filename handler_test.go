@@ -62,8 +62,8 @@ func TestServeMux(t *testing.T) {
 
 func TestRequest(t *testing.T) {
 	var handler http.HandlerFunc = func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, r.Method)
-		fmt.Fprintf(w, r.RequestURI)
+		fmt.Fprint(w, r.Method)
+		fmt.Fprint(w, r.RequestURI)
 	}
 	GetServer(handler)
 }
