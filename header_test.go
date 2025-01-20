@@ -71,3 +71,18 @@ func TestRequestHeader2(t *testing.T) {
 	body, _ := io.ReadAll(response.Body)
 	fmt.Println(string(body))
 }
+
+func ResponseHeader2(w http.ResponseWriter, r *http.Request)  {
+  w.Header().Add("content-type","application/json")
+  fmt.Fprint(w, "ok")
+}
+
+func TestResponseHeader2(t *testing.T)  {
+  request := httptest.NewRequest(http.MethodPost, "http://localhost",nil)
+  record := httptest.NewRecorder()
+  ResponseHeader2(record,request)
+  response := record.Result()
+  body ,_ := io.ReadAll(response.Body)
+  fmt.Println(string(body))
+  fmt.Println(response.Header.Get("content-type"))
+}
