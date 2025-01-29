@@ -86,3 +86,39 @@ func TestResponseHeader2(t *testing.T)  {
   fmt.Println(string(body))
   fmt.Println(response.Header.Get("content-type"))
 }
+
+
+
+func RequestHeader3(w http.ResponseWriter, r *http.Request) {
+  contentType := r.Header.Get("content-type")
+  fmt.Fprint(w, contentType)
+}
+
+func TestRequestHeader3(t *testing.T) {
+  request := httptest.NewRequest(http.MethodGet,"http://localhost",nil)
+  request.Header.Add("content-type","application/json")
+  recorder := httptest.NewRecorder()
+  RequestHeader3(recorder,request)
+  response := recorder.Result()
+  body, _ := io.ReadAll(response.Body)
+  fmt.Println(string(body))
+}
+
+func ResponseHeader3(w http.ResponseWriter, r *http.Request) {
+  w.Header().Add("content-type","application/json")
+  fmt.Fprint(w,"ok")
+}
+
+func TestResponseHeader3(t *testing.T) {
+  request := httptest.NewRequest(http.MethodPost,"http://localhost",nil)
+  recorder := httptest.NewRecorder()
+  ResponseHeader3(recorder,request)
+  response := recorder.Result()
+  body , _ := io.ReadAll(response.Body)
+  fmt.Println(string(body))
+   fmt.Println(response.Header.Get("content-type"))
+}
+
+
+
+
